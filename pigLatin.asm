@@ -32,12 +32,22 @@ Print       ADD         R0, R4, #1
             OUT
             LEA         R0, ConsEnd
             PUTS
-            BRnzp       Start
+            BRnzp       ClearMem
 
 PrintVowel  ADD         R0, R4, #0
             PUTS
             LEA         R0, VowelEnd
             PUTS
+
+ClearMem    AND         R6, R6, #0
+            AND         R5, R5, #0
+            ADD         R5, R5, #15
+            ADD         R5, R5, #5
+            LEA         R4, English
+ClearNext   STR         R6, R4, #0
+            ADD         R4, R4, #1
+            ADD         R5, R5, #-1
+            BRnp        ClearNext
             BRnzp       Start
 
 English     .BLKW       20  
